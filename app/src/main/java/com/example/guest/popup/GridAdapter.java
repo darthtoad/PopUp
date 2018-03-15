@@ -28,8 +28,6 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        Random random = new Random();
-        i = random.nextInt(getCount() - 1);
         String word = words[i];
         return word;
     }
