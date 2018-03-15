@@ -6,15 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -45,7 +44,7 @@ public class GridActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
         button.setOnClickListener(this);
         String[] words = {
-                "Burnside", "Pitcairn", "ashen", "backpack", "bursal", "drippy", "katun", "lakelander", "spinneys", "traunch", "simonian", "agnolotti", "entorhinal", "entry-level", "fish-food", "funboard", "funnily", "mocked", "pin-up", "shadowboxes", "bronchotomhy", "choiceful", "craterlet", "exiles", "frount", "garcon", "humors", "megalomaniac", "rat-pit", "strobing"
+                "Burnside", "Pitcairn", "ashen", "backpack", "bursal", "drippy", "katun", "lakelander", "spinneys", "traunch", "simonian", "agnolotti", "entorhinal", "entry-level", "fish-food", "funboard", "funnily", "mocked", "pin-up", "shadowboxes", "bronchotomy", "choiceful", "craterlet", "exiles", "frount", "garcon", "humors", "megalomaniac", "rat-pit", "strobing"
         };
         ArrayList<String> wordsList = new ArrayList<String>(Arrays.asList(words));
         ArrayList<String> listRandomWords = getRandomWords(wordsList);
@@ -54,6 +53,13 @@ public class GridActivity extends AppCompatActivity implements View.OnClickListe
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/PLUMP.ttf");
         GridView gridView = (GridView) findViewById(R.id.baseGridView);
         gridView.setAdapter(new GridAdapter(this, randomWords, typeface));
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(GridActivity.this, "YOU HAVE HELD YOUR FINGER FOR TOO LONG, MY CHILD", Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -68,13 +74,7 @@ public class GridActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    @Override
-//    public void onLongClick(View v) {
-//        if (v == button) {
-//            Toast toast = new Toast;
-//
-//        }
-//    }
+
 
 
 }
