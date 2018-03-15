@@ -1,10 +1,15 @@
 package com.example.guest.popup;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -12,7 +17,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class GridActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class GridActivity extends AppCompatActivity implements View.OnClickListener {
+    @BindView(R.id.button) Button button;
+    @BindView(R.id.addSentence) EditText addSentence;
+
+    ArrayList<String> sentences = new ArrayList<String>();
 
     public ArrayList<String> getRandomWords(ArrayList<String> words) {
         ArrayList randomWordsFinal = new ArrayList<String>();
@@ -30,6 +42,8 @@ public class GridActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
+        ButterKnife.bind(this);
+        button.setOnClickListener(this);
         String[] words = {
                 "Burnside", "Pitcairn", "ashen", "backpack", "bursal", "drippy", "katun", "lakelander", "spinneys", "traunch", "simonian", "agnolotti", "entorhinal", "entry-level", "fish-food", "funboard", "funnily", "mocked", "pin-up", "shadowboxes", "bronchotomhy", "choiceful", "craterlet", "exiles", "frount", "garcon", "humors", "megalomaniac", "rat-pit", "strobing"
         };
@@ -41,4 +55,26 @@ public class GridActivity extends AppCompatActivity {
         GridView gridView = (GridView) findViewById(R.id.baseGridView);
         gridView.setAdapter(new GridAdapter(this, randomWords, typeface));
     }
+
+    @Override
+    public void onClick(View v) {
+        if (v == button) {
+            Log.d("things", "onClick works");
+            String sentence = addSentence.getText().toString();
+            sentences.add(sentence);
+            Intent intent = new Intent(GridActivity.this, SentenceActivity.class);
+            intent.putStringArrayListExtra("sentences", sentences);
+            startActivity(intent);
+        }
+    }
+
+//    @Override
+//    public void onLongClick(View v) {
+//        if (v == button) {
+//            Toast toast = new Toast;
+//
+//        }
+//    }
+
+
 }

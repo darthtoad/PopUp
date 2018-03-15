@@ -16,7 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GridActivity"></activity>
+        <activity android:name=".GridActivity" />
+        <activity
+            android:name=".SentenceActivity"
+            android:label="@string/title_activity_sentence"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
