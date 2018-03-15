@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class GridAdapter extends BaseAdapter {
     private Context context;
     private String[] words;
@@ -26,6 +28,8 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
+        Random random = new Random();
+        i = random.nextInt(getCount() - 1);
         String word = words[i];
         return word;
     }
